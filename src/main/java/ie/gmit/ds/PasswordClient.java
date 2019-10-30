@@ -13,15 +13,17 @@ public class PasswordClient {
 
 	private static final Logger logger = Logger.getLogger(PasswordClient.class.getName());
 	private final ManagedChannel channel;
-	private final PasswordServiceGrpc.PasswordServiceBlockingStub passwordClientStub;
+	//private final PasswordServiceGrpc.PasswordServiceBlockingStub passwordClientStub;
+	private final PasswordServiceGrpc.PasswordServiceStub asyncPasswordService;
+	private final PasswordServiceGrpc.PasswordServiceBlockingStub syncPasswordService;
 	
 	public PasswordClient(String host, int port) {
-        this.channel = ManagedChannelBuilder.forAddress(host, port)
-                // Channels are secure by default (via SSL/TLS). For the example we disable TLS to avoid
-                // needing certificates.
-                .usePlaintext()
-                .build();
-        passwordClientStub = PasswordServiceGrpc.newBlockingStub(channel);
+       channel = ManagedChannelBuilder
+    		   .forAddress(host, port)
+    		   .usePlaintext()
+    		   .build();
+       syncPasswordService = PasswordServiceGrpc.newBlockingStub(channel);
+       asyncPasswordService = PasswordServiceGrpc.newStub(channel);
     }
 	
 	public void shutdown() throws InterruptedException {

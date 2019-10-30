@@ -23,7 +23,7 @@ public class PasswordServer {
 	private void start() throws IOException {
 		int port = 50051;
 		server = ServerBuilder.forPort(port)
-				.addService(new PasswordServer.PasswordServiceImpl())
+				.addService(new PasswordServiceImpl())
 				.build()
 				.start();
 		logger.info("Server started, listening on " + port);
@@ -41,7 +41,7 @@ public class PasswordServer {
 	        }
 	    }
 	 
-	 static class PasswordServiceImpl extends PasswordServiceImplBase {
+	/* static class PasswordServiceImpl extends PasswordServiceImplBase {
 		 
 		 @Override
 		 public void hashPassword(HashPasswordRequest req, StreamObserver<HashPasswordResponse> responseObserver) {
@@ -49,5 +49,6 @@ public class PasswordServer {
             responseObserver.onCompleted();
 		 }
 		 
-	 }
+	 }*/
+	 
 }
