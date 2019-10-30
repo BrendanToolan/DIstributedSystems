@@ -10,11 +10,19 @@ public class PasswordServiceImpl extends PasswordServiceGrpc.PasswordServiceImpl
 
 	private static final Logger logger = Logger.getLogger(PasswordServiceImpl.class.getName());
 
+	public PasswordServiceImpl() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	@Override
 	public void hashPassword(HashPasswordRequest request, StreamObserver<HashPasswordResponse> responseObserver) {
 		// TODO Auto-generated method stub
-		super.hashPassword(request, responseObserver);
+	//	String password = request.getPassword();
+		//char[] hashString = password.toCharArray();
+		
+		//byte[] addSalt = Passwords.getSalt();
+	//	byte[] paswordHashed = Passwords.hash(hashString, addSalt);
+		
 	}
 
 	@Override
