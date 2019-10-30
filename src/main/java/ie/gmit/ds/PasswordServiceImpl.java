@@ -17,11 +17,11 @@ public class PasswordServiceImpl extends PasswordServiceGrpc.PasswordServiceImpl
 	@Override
 	public void hashPassword(HashPasswordRequest request, StreamObserver<HashPasswordResponse> responseObserver) {
 		// TODO Auto-generated method stub
-	//	String password = request.getPassword();
-		//char[] hashString = password.toCharArray();
+		String password = request.getPassword();
+		char[] hashString = password.toCharArray();
 		
-		//byte[] addSalt = Passwords.getSalt();
-	//	byte[] paswordHashed = Passwords.hash(hashString, addSalt);
+		byte[] addSalt = Passwords.getNextSalt();
+		byte[] paswordHashed = Passwords.hash(hashString, addSalt);
 		
 	}
 
