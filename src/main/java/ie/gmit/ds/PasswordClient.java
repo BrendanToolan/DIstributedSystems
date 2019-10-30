@@ -30,7 +30,7 @@ public class PasswordClient {
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
     }
 	
-	public void tester(String name) {
+	/*public void tester(String name) {
         logger.info("Will try to greet " + name + " ...");
         HashPasswordRequest request = HashPasswordRequest.newBuilder().build();
         HashPasswordResponse response = null;
@@ -42,15 +42,30 @@ public class PasswordClient {
         }
         logger.info("Client and Server Connected");
     }
-
+*/
+	public void hashPw(int id, String password)
+	{
+		logger.info("Connected");
+		
+		HashPasswordRequest req = HashPasswordRequest.newBuilder()
+				.setId(id)
+				.setPassword(password)
+				.build();
+	
+		HashPasswordResponse res = null;
+		
+		logger.info("Hash password: "+ res);
+	}
 	
 	public static void main(String[] args) throws Exception {
         PasswordClient client = new PasswordClient("localhost", 50051);
         try {
-            client.tester("hello");
+            client.hashPw(0, "hello");
         } finally {
             client.shutdown();
         }
+        
+        
     }
 	
 }
