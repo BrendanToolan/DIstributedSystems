@@ -24,16 +24,16 @@ public class Passwords {
     }
 	
 	public static byte[] hash(char[] password, byte[] salt) {
-		PBEKeySpec spec = new PBEKeySpec(password, salt, ITERATIONS, KEY_LENGTH);
-		try {
-			SecretKeyFactory skf = SecretKeyFactory.getInstance("PJKDF2WithHmacSHA1");
-			return skf.generateSecret(spec).getEncoded();
-		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-			throw new AssertionError("Error while hashing a password: "+e.getMessage(), e);
-		} finally {
-			spec.clearPassword();
-		}
-	}
+        PBEKeySpec spec = new PBEKeySpec(password, salt, ITERATIONS, KEY_LENGTH);
+        try {
+            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+            return skf.generateSecret(spec).getEncoded();
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            throw new AssertionError("Error while hashing a password: " + e.getMessage(), e);
+        } finally {
+            spec.clearPassword();
+        }
+    }
 	
 	public static boolean isExpectedPassword(char[] password, byte[] salt, byte[] expectedHash) {
 		byte[] pwdHash = hash(password, salt);
@@ -64,18 +64,18 @@ public class Passwords {
 		byte[] salt = getNextSalt();
 		System.out.println("Salt: " + salt);
 		// Hash password
-		byte[] hashedPassword = hash(randomPassword.toCharArray(), salt);
-		System.out.println("Hashed Password: " + hashedPassword);
+		byte[] passwordHashed = hash(randomPassword.toCharArray(), salt);
+		System.out.println("Hashed Password: " + passwordHashed);
 
 		/**
 		 * Check is valid, one true, one false
 		 */
 		// True check
-		isValid = isExpectedPassword(randomPassword.toCharArray(), salt, hashedPassword);
+		isValid = isExpectedPassword(randomPassword.toCharArray(), salt, passwordHashed);
 		System.out.println("Is Valid: " + isValid);
 		// False check
 		String newRandomPassword = generateRandomPassword(10);
-		isValid = isExpectedPassword(newRandomPassword.toCharArray(), salt, hashedPassword);
+		isValid = isExpectedPassword(newRandomPassword.toCharArray(), salt, passwordHashed);
 		System.out.println("Is valid: " + isValid);
 	}
 	

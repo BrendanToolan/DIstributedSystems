@@ -3,6 +3,7 @@ package ie.gmit.ds;
 import java.util.logging.Logger;
 
 import com.google.protobuf.BoolValue;
+import com.google.protobuf.ByteString;
 
 import io.grpc.stub.StreamObserver;
 
@@ -21,14 +22,29 @@ public class PasswordServiceImpl extends PasswordServiceGrpc.PasswordServiceImpl
 		char[] hashString = password.toCharArray();
 		
 		byte[] addSalt = Passwords.getNextSalt();
+		
 		byte[] paswordHashed = Passwords.hash(hashString, addSalt);
 		
+		responseObserver.onNext(HashPasswordResponse.newBuilder().setId(request.getId()).setPasswordHashed(ByteString.copyFrom(paswordHashed)).setSalt(ByteString.copyFrom(addSalt)).build());
+		responseObserver.onCompleted();
 	}
 
 	@Override
 	public void validateHash(ValidRequest request, StreamObserver<BoolValue> responseObserver) {
 		// TODO Auto-generated method stub
-		super.validateHash(request, responseObserver);
+		char[] password = request.getPassword().toCharArray();
+		byte[] paswordHashed = request.getPasswordHashed().toByteArray();
+		byte[] salt = request.getSalt().toByteArray();
+		
+		if(Passwords.isExpectedPassword(password, salt, paswordHashed)) {
+			boolean equals = responseObserver.equals(true);
+		}
+		else {
+			boolean equals = responseObserver.equals(false);
+		}
+		
+		
+	
 	}
 
 	
