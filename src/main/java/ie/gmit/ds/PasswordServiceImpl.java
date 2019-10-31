@@ -36,13 +36,7 @@ public class PasswordServiceImpl extends PasswordServiceGrpc.PasswordServiceImpl
 		byte[] paswordHashed = request.getPasswordHashed().toByteArray();
 		byte[] salt = request.getSalt().toByteArray();
 		
-		if(Passwords.isExpectedPassword(password, salt, paswordHashed)) {
-			boolean equals = responseObserver.equals(true);
-		}
-		else {
-			boolean equals = responseObserver.equals(false);
-		}
-		
+		responseObserver.equals(Passwords.isExpectedPassword(password, salt, paswordHashed));
 		
 	
 	}

@@ -43,7 +43,8 @@ public class PasswordClient {
         logger.info("Client and Server Connected");
     }
 */
-	public void hashPw(int id, String password)
+	
+	/*public void hashPassword(int id, String password)
 	{
 		logger.info("Connected");
 		
@@ -52,15 +53,29 @@ public class PasswordClient {
 				.setPassword(password)
 				.build();
 	
-		HashPasswordResponse res = null;
+		HashPasswordResponse res = asyncPasswordService.hashPassword(req, responseObserver);
 		
 		logger.info("Hash password: "+ res);
+	}*/
+	
+	public void hashPassword(int id, String password) {
+		logger.info("Hash Request detail:\nUser ID: "+id+"\nPassword: "+password);
+		HashPasswordRequest req = HashPasswordRequest.newBuilder().setId(id).setPassword(password).build();
+		HashPasswordResponse res; try {
+			res = syncPasswordService.hashPassword(req);
+			logger.info(res.toString());
+		} catch
+			(StatusRuntimeException ex){
+				logger.log(Level.WARNING, "Failed:{0}", ex.getStatus());
+				//return
+			}
+	
 	}
 	
 	public static void main(String[] args) throws Exception {
         PasswordClient client = new PasswordClient("localhost", 50051);
         try {
-            client.hashPw(0, "hello");
+            client.hashPassword(23, "testPassword");
         } finally {
             client.shutdown();
         }
