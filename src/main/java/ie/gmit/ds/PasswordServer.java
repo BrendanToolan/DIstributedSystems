@@ -40,15 +40,7 @@ public class PasswordServer {
 	            server.awaitTermination();
 	        }
 	    }
-	 
-	/* static class PasswordServiceImpl extends PasswordServiceImplBase {
-		 
-		 @Override
-		 public void hashPassword(HashPasswordRequest req, StreamObserver<HashPasswordResponse> responseObserver) {
-		
-            responseObserver.onCompleted();
-		 }
-		 
-	 }*/
+
+
 	 
 }

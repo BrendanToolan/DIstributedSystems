@@ -30,36 +30,8 @@ public class PasswordClient {
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
     }
 	
-	/*public void tester(String name) {
-        logger.info("Will try to greet " + name + " ...");
-        HashPasswordRequest request = HashPasswordRequest.newBuilder().build();
-        HashPasswordResponse response = null;
-        try {
-            //response = passwordClientStub;
-        } catch (StatusRuntimeException e) {
-            logger.log(Level.WARNING, "RPC failed: {0}", e.getStatus());
-            return;
-        }
-        logger.info("Client and Server Connected");
-    }
-*/
-	
-	/*public void hashPassword(int id, String password)
-	{
-		logger.info("Connected");
-		
-		HashPasswordRequest req = HashPasswordRequest.newBuilder()
-				.setId(id)
-				.setPassword(password)
-				.build();
-	
-		HashPasswordResponse res = asyncPasswordService.hashPassword(req, responseObserver);
-		
-		logger.info("Hash password: "+ res);
-	}*/
-	
 	public void hashPassword(int id, String password) {
-		logger.info("Hash Request detail:\nUser ID: "+id+"\nPassword: "+password);
+		logger.info("User ID: "+id+"\nPassword: "+password);
 		HashPasswordRequest req = HashPasswordRequest.newBuilder().setId(id).setPassword(password).build();
 		HashPasswordResponse res; try {
 			res = syncPasswordService.hashPassword(req);
@@ -75,7 +47,7 @@ public class PasswordClient {
 	public static void main(String[] args) throws Exception {
         PasswordClient client = new PasswordClient("localhost", 50051);
         try {
-            client.hashPassword(23, "testPassword");
+            client.hashPassword(69, "Password-Test");
         } finally {
             client.shutdown();
         }

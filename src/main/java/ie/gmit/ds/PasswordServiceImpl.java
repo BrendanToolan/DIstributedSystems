@@ -15,6 +15,7 @@ public class PasswordServiceImpl extends PasswordServiceGrpc.PasswordServiceImpl
 		// TODO Auto-generated constructor stub
 	}
 	
+	// method used to 
 	@Override
 	public void hashPassword(HashPasswordRequest request, StreamObserver<HashPasswordResponse> responseObserver) {
 		// TODO Auto-generated method stub
@@ -30,7 +31,7 @@ public class PasswordServiceImpl extends PasswordServiceGrpc.PasswordServiceImpl
 	}
 
 	@Override
-	public void validateHash(ValidRequest request, StreamObserver<BoolValue> responseObserver) {
+	public void validateHash(ValidRequest request, StreamObserver responseObserver) {
 		// TODO Auto-generated method stub
 		char[] password = request.getPassword().toCharArray();
 		byte[] paswordHashed = request.getPasswordHashed().toByteArray();
