@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class PasswordClient {
 
 	private static final Logger logger = Logger.getLogger(PasswordClient.class.getName());
@@ -47,7 +46,7 @@ public class PasswordClient {
 	public static void main(String[] args) throws Exception {
         PasswordClient client = new PasswordClient("localhost", 50051);
         try {
-            client.hashPassword(69, "Password-Test");
+            client.hashPassword(69, "WWW");
         } finally {
             client.shutdown();
         }

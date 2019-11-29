@@ -6,7 +6,6 @@ ie/gmit/ds/HashPasswordResponse$1.class
 ie/gmit/ds/PasswordServiceGrpc$PasswordServiceBaseDescriptorSupplier.class
 ie/gmit/ds/PasswordServiceGrpc$PasswordServiceImplBase.class
 ie/gmit/ds/PasswordServer.class
-PasswordServer.class
 ie/gmit/ds/PasswordServiceGrpc$PasswordServiceStub.class
 ie/gmit/ds/Passwords.class
 ie/gmit/ds/PasswordServiceGrpc$MethodHandlers.class
