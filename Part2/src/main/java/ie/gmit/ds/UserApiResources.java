@@ -63,7 +63,7 @@ public class UserApiResources {
         }
         if (u != null) {
             UserDB.updateUser(user.getUserID(), user);
-            return Response.created(new URI("/Users/" + user.getUserID()))
+            return Response.created(new URI("/users/" + user.getUserID()))
                     .build();
         } else
             return Response.status(Status.NOT_FOUND).build();
@@ -87,9 +87,9 @@ public class UserApiResources {
 		}
 		
 		if(u != null) {
-			user.setUserID(userID);
+			//user.setUserID(userID);
 			UserDB.updateUser(userID, user);
-			return Response.ok(user).build();
+			return Response.status(Status.OK).build();
 		}
 		else
 			return Response.status(Status.NOT_FOUND).build();
