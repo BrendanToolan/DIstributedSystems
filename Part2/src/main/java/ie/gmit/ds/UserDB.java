@@ -18,6 +18,12 @@ public class UserDB {
 		return new ArrayList<UserClass>(usersMap.values());
 	}
 	
+	//create user
+	public static void createUser(int userID, String userName, String password, String email, UserClass user) {
+		int i = 0;
+		usersMap.put(i, new UserClass(userID, userName, password, email));
+	}
+	
 	//get user by id
 	public static UserClass getUserById(int userID) {
 		return usersMap.get(userID);

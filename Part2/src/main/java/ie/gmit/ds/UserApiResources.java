@@ -48,10 +48,12 @@ public class UserApiResources {
 			return Response.status(Status.NOT_FOUND).build();
 	}
 	
+	//post method does not work
+	/*
 	//create a user
 	@POST
 	public Response createUser(UserClass user) throws URISyntaxException {
-        // validation
+       
         Set<ConstraintViolation<UserClass>> violations = v.validate(user);
         UserClass u = UserDB.getUserById(user.getUserID());
         if (violations.size() > 0) {
@@ -62,13 +64,15 @@ public class UserApiResources {
             return Response.status(Status.BAD_REQUEST).entity(validationMessages).build();
         }
         if (u != null) {
-            UserDB.updateUser(user.getUserID(), user);
-            return Response.created(new URI("/users/" + user.getUserID()))
-                    .build();
+            UserDB.createUser(user.getUserID(),user.getUserName(), user.getPassword(), user.getEmail(),  user);
+            return Response.ok("New User Added").build();
         } else
             return Response.status(Status.NOT_FOUND).build();
     }
+	*/
 	
+	//put method does not work
+	/*
 	//update user
 	@PUT
 	@Path("/{userID}")
@@ -87,7 +91,7 @@ public class UserApiResources {
 		}
 		
 		if(u != null) {
-			//user.setUserID(userID);
+			user.setUserID(userID);
 			UserDB.updateUser(userID, user);
 			return Response.status(Status.OK).build();
 		}
@@ -107,5 +111,5 @@ public class UserApiResources {
 		else
 			return Response.status(Status.NOT_FOUND).build();
 	}
-	
+	*/
 }
